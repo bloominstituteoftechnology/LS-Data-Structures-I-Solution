@@ -1,4 +1,3 @@
-/* eslint-disable */
 class Stack {
   constructor() {
     this.storage = [];
@@ -8,11 +7,11 @@ class Stack {
     return this.storage.length;
   }
 
-  add(item) {
+  push(item) {
     this.storage.push(item);
   }
 
-  remove() {
+  pop() {
     return this.storage.pop();
   }
 }

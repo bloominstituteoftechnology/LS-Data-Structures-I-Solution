@@ -15,11 +15,6 @@ class LinkedList {
       this.tail = newNode;
       return;
     }
-    if (this.head.next === null) {
-      this.head.next = newNode;
-      this.tail = newNode;
-      return;
-    }
     this.tail.next = newNode;
     this.tail = newNode;
   }

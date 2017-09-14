@@ -2,8 +2,8 @@
 const { LimitedArray, getIndexBelowMax } = require('./hash-table-helpers');
 
 class HashTable {
-  constructor() {
-    this.limit = 8;
+  constructor(limit = 8) {
+    this.limit = limit;
     this.storage = new LimitedArray(this.limit);
     // Do not modify anything inside of the constructor
   }
@@ -21,7 +21,7 @@ class HashTable {
     const oldStorage = this.storage;
     this.storage = new LimitedArray(this.limit);
     oldStorage.each((bucket) => {
-      if (bucket === undefined) return;
+      if (!bucket) return;
       bucket.forEach((pair) => {
         this.insert(pair[0], pair[1]);
       });
@@ -33,7 +33,7 @@ class HashTable {
     const index = getIndexBelowMax(key.toString(), this.limit);
     const bucket = this.storage.get(index);
 
-    if (bucket === undefined) {
+    if (!bucket) {
       this.storage.set(index, [[key, value]]);
       return;
     }
@@ -53,6 +53,7 @@ class HashTable {
   remove(key) {
     const index = getIndexBelowMax(key.toString(), this.limit);
     const bucket = this.storage.get(index);
+    if (!bucket) return;
     if (bucket.length === 1) return this.storage.set(index, undefined);
     bucket.forEach((pair, i) => {
       if (pair[0] === key) bucket.splice(i, 1);
@@ -63,7 +64,7 @@ class HashTable {
   retrieve(key) {
     const index = getIndexBelowMax(key.toString(), this.limit);
     const bucket = this.storage.get(index);
-    if (bucket === undefined) return undefined;
+    if (!bucket) return undefined;
     for (let i = 0; i < bucket.length; i++) {
       if (bucket[i][0] === key) return bucket[i][1];
     }
