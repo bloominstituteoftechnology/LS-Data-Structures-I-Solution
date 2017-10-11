@@ -33,7 +33,7 @@ class HashTable {
     const index = getIndexBelowMax(key.toString(), this.limit);
     const bucket = this.storage.get(index);
 
-    if (!bucket) {
+    if (bucket === undefined) {
       this.storage.set(index, [[key, value]]);
       return;
     }
