@@ -9,11 +9,11 @@ class HashTable {
   }
 
   checkCapacity() {
-    let fullCells = 1;
+    let fullCells = 0;
     this.storage.each((bucket) => {
       if (bucket !== undefined) fullCells++;
     });
-    if (fullCells / this.limit > 0.75) return true;
+    if (fullCells / this.limit >= 0.75) return true;
   }
 
   resize() {
